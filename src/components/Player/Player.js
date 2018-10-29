@@ -237,6 +237,7 @@ class Player extends Component {
 			this.poster = this.playerBox.getElementsByClassName('vjs-poster')[0];
 		}
 		this.player.on('play', this.onPlay);
+		this.onProgress();
 
 		this.videoJsBox = this.playerBox.getElementsByClassName('Player__video');
 
@@ -421,6 +422,9 @@ class Player extends Component {
 			this.player.play();
 		}
 	};
+	onProgress = () => {
+		this.player.on('progress', this.props.onProgress)
+	}
 	// For Waypoint
 	onEnter = e => {
 		this.timer = setTimeout(() => {
@@ -585,6 +589,7 @@ class Player extends Component {
 			);
 	};
 	render() {
+		
 		return isIos() && !this.props.playOnScroll ? (
 			<Waypoint
 				onEnter={!this.state.renderedVideoNode ? this.onEnter : this.noop}
